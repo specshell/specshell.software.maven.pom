@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.specshell.maven</groupId>
+    <artifactId>parent-pom</artifactId>
+    <version>@project.version@</version>
+    <relativePath />
+  </parent>
+  <groupId>com.specshell.maven.its</groupId>
+  <artifactId>sample</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <properties>
+    <java.level>8</java.level>
+  </properties>
+  <repositories>
+    <repository>
+      <id>specshell</id>
+      <name>specshell-maven</name>
+      <url>https://nexus.specshell.systems/repository/maven-public</url>
+    </repository>
+  </repositories>
+</project>
