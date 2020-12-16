@@ -21,7 +21,7 @@
   </properties>
   <scm>
     <connection>scm:git:git://github.com/Specshell/specshell.software.maven.parent-pom.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/Specshell/specshell.software.maven.parent-pom.git</developerConnection>
+    <developerConnection>scm:git:https://github.com/Specshell/specshell.software.maven.parent-pom.git</developerConnection>
     <url>https://github.com/Specshell/specshell.software.maven.parent-pom</url>
     <tag>HEAD</tag>
   </scm>
