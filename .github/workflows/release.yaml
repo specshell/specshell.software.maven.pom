@@ -39,6 +39,12 @@ jobs:
     - name: Checkout main branch
       run: git checkout main
 
+    - name: Maven Install
+      env:
+        NEXUS_USER: ${{ secrets.NEXUS_USER }}
+        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+      run: mvn -B -V --no-transfer-progress --file pom.xml install
+
     - name: Set Version
       run: |
         version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
