@@ -23,8 +23,8 @@ jobs:
         servers: |
             [{
                 "id": "specshell",
-                "username": "${ env.NEXUS_USER }}",
-                "password": "${ env.NEXUS_PASSWORD }}"
+                "username": "${env.NEXUS_USER}",
+                "password": "${env.NEXUS_PASSWORD}"
             }]
 
     - name: Cache local Maven repository
