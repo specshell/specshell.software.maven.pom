@@ -1,7 +1,8 @@
 name: Release workflow
 on:
   push:
-    branches: main
+    branches:
+    - main
 
 jobs:
   release:
@@ -19,6 +20,14 @@ jobs:
         server-id: specshell
         server-username: NEXUS_USER
         server-password: NEXUS_PASSWORD
+
+    - name: Cache local Maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
 
     - name: Configure git
       run: |

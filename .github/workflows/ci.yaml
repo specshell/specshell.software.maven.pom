@@ -25,6 +25,14 @@ jobs:
         server-username: NEXUS_USER
         server-password: NEXUS_PASSWORD
 
+    - name: Cache local Maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
     - name: Install with Maven
       run: mvn install -B -V --no-transfer-progress --file pom.xml
       env:
