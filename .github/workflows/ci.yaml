@@ -21,9 +21,15 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-        server-id: specshell
-        server-username: NEXUS_USER
-        server-password: NEXUS_PASSWORD
+
+    - uses: s4u/maven-settings-action@v2.2.0
+      with:
+        servers: |
+            [{
+                "id": "specshell",
+                "username": "${ env.NEXUS_USER }}",
+                "password": "${ env.NEXUS_PASSWORD }}"
+            }]
 
     - name: Cache local Maven repository
       uses: actions/cache@v2
@@ -38,3 +44,4 @@ jobs:
       env:
         NEXUS_USER: ${{ secrets.NEXUS_USER }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
