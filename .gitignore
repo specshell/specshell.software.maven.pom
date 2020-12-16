@@ -1,3 +1,144 @@
+#############################################
+# Custom Specshell files                    #
+#############################################
 target/
-*.log
+log
+raw
+raw_un
+processed_zipped
+local_*
+package-lock.json
+*.pyc
+runtime.properties
+
+#############################################
+# Java                                      #
+#############################################
+*.war
+*.ear
+hs_err_pid*
+
+#############################################
+# Maven                                     #
+#############################################
+pom.xml.versionsBackup
+
+#############################################
+# GWT                                       #
+#############################################
+war/
+html/war/gwt_bree/
+html/gwt-unitCache/
+.apt_generated/
+html/war/WEB-INF/deploy/
+html/war/WEB-INF/classes/
+.gwt/
+gwt-unitCache/
+www-test/
+.gwt-tmp/
+
+#############################################
+# Android / IntelliJ general                #
+#############################################
+## Android Studio and Intellij and Android in general
+android/libs/armeabi/
+android/libs/armeabi-v7a/
+android/libs/x86/
+android/gen/
 .idea/
+*.ipr
+*.iws
+*.iml
+out/
+com_crashlytics_export_strings.xml
+
+#############################################
+# Eclipse                                   #
+#############################################
+.classpath
+.project
+.metadata
+**/bin/
+tmp/
+*.tmp
+*.bak
+*~.nib
+local.properties
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+.factorypath
+#############################################
+# Netbeans                                  #
+#############################################
+**/nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+#############################################
+# Gradle                                    #
+#############################################
+.gradle
+gradle-app.setting
+
+#############################################
+# OS Specific                               #
+#############################################
+.DS_Store
+!/26-10-2017_water.swp
+/data/
+/virtual/
+/unsent/
+/zeroes/
+/processed/
+
+#############################################
+# Angular                                   #
+#############################################
+### compiled output
+dist
+tmp
+out-tsc
+builds
+
+### dependencies
+node_modules
+
+### IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+### IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### misc
+.sass-cache
+connect.lock
+coverage
+libpeerconnection.log
+npm-debug.log
+testem.log
+typings
+
+### e2e
+nuc-local-dashboard/e2e/*.js
+nuc-local-dashboard/e2e/*.map
+
+### System Files
+.DS_Store
+Thumbs.db
+*.iml
