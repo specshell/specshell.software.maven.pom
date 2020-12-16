@@ -61,7 +61,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NEXUS_USER: ${{ secrets.NEXUS_USER }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-      run: mvn -B -V --no-transfer-progress --file pom.xml release:prepare release:perform
+      run: mvn -B -V --no-transfer-progress --file pom.xml release:prepare release:perform -Dusername=$GITHUB_ACTOR -Dpassword=$GITHUB_TOKEN
 
     - name: Create Release
       id: create_release
