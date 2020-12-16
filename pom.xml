@@ -106,6 +106,7 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
           <mavenExecutorId>forked-path</mavenExecutorId>
           <useReleaseProfile>false</useReleaseProfile>
           <preparationGoals>clean install</preparationGoals>
