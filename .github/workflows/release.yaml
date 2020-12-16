@@ -53,7 +53,7 @@ jobs:
 
     - name: Set Version
       run: |
-        version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        version=$(grep --color=never -oPm1 "(?<=<version>)[^<]+" "pom.xml")
         echo "RELEASE_VERSION=${version%-SNAPSHOT}" >> $GITHUB_ENV
 
     - name: Perform release
