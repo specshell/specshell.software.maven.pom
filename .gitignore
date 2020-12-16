@@ -22,6 +22,8 @@ hs_err_pid*
 # Maven                                     #
 #############################################
 pom.xml.versionsBackup
+pom.xml.releaseBackup
+release.properties
 
 #############################################
 # GWT                                       #
