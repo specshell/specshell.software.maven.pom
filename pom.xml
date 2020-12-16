@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.specshell.maven</groupId>
   <artifactId>parent-pom</artifactId>
-  <version>0.1.5-SNAPSHOT</version>
+  <version>0.1.5</version>
   <packaging>pom</packaging>
 
   <name>Specshell Parent POM</name>
@@ -23,7 +23,7 @@
     <connection>scm:git:git://github.com/Specshell/specshell.software.maven.parent-pom.git</connection>
     <developerConnection>scm:git:https://github.com/Specshell/specshell.software.maven.parent-pom.git</developerConnection>
     <url>https://github.com/Specshell/specshell.software.maven.parent-pom</url>
-    <tag>HEAD</tag>
+    <tag>v0.1.5</tag>
   </scm>
 
   <dependencyManagement>
