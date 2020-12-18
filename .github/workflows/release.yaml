@@ -39,25 +39,20 @@ jobs:
         echo "GIT_SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
     - name: Set version
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NEXUS_USER: ${{ secrets.NEXUS_USER }}
-        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run: |
         mvn versions:set -DnewVersion=$RELEASE_VERSION
 
     - name: Deploy Nexus release
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NEXUS_USER: ${{ secrets.NEXUS_USER }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run: |
-        mvn -B -V --no-transfer-progress --file pom.xml deploy
+        mvn -B -V --no-transfer-progress deploy
 
     - name: Deploy GitHub release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NEXUS_USER: ${{ secrets.NEXUS_USER }}
-        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run: |
-        mvn -B -V --no-transfer-progress --file pom.xml deploy -Dregistry=https://maven.pkg.github.com/Specshell -Dtoken=$GITHUB_TOKEN
+        mvn -B -V --no-transfer-progress deploy \
+          -P github \
+          --define github.repo=specshell.software.maven.pom
