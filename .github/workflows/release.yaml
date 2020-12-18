@@ -50,12 +50,20 @@ jobs:
         version=$(grep --color=never -oPm1 "(?<=<version>)[^<]+" "pom.xml")
         echo "RELEASE_VERSION=${version%-SNAPSHOT}" >> $GITHUB_ENV
 
+    - name: Generate token
+      id: generate_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: ${{ secrets.SPECSHELL_PUSH_APP_ID }}
+        private_key: ${{ secrets.SPECSHELL_PUSH_APP_PEM }}
+
     - name: Perform release
       env:
+        TOKEN: ${{ steps.generate_token.outputs.token }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NEXUS_USER: ${{ secrets.NEXUS_USER }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-      run: mvn -B -V --no-transfer-progress --file pom.xml release:prepare release:perform -Dusername=$GITHUB_ACTOR -Dpassword=$GITHUB_TOKEN
+      run: mvn -B -V --no-transfer-progress --file pom.xml release:prepare release:perform -Dusername=$GITHUB_ACTOR -Dpassword=$TOKEN
 
     - name: Create Release
       id: create_release
