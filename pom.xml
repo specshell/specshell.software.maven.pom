@@ -188,6 +188,11 @@
       <name>specshell-maven</name>
       <url>https://nexus.specshell.systems/repository/maven-public</url>
     </repository>
+    <repository>
+      <id>github</id>
+      <name>GitHub Specshell Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/Specshell</url>
+    </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
