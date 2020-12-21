@@ -106,7 +106,6 @@
           <target>1.${java.level}</target>
           <testSource>1.${java.test.level}</testSource>
           <testTarget>1.${java.test.level}</testTarget>
-          <compilerArgument>-Werror</compilerArgument>
           <proc>none</proc>
         </configuration>
       </plugin>
