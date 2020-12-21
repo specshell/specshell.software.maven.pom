@@ -17,7 +17,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <specshell.bom.version>0.1.21</specshell.bom.version>
+    <specshell.bom.version>0.1.22</specshell.bom.version>
+    <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
     <github.repo>undefined</github.repo>
   </properties>
   <scm>
@@ -33,6 +34,13 @@
         <groupId>com.specshell.maven</groupId>
         <artifactId>bom</artifactId>
         <version>${specshell.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
