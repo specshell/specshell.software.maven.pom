@@ -20,11 +20,11 @@ jobs:
     - uses: s4u/maven-settings-action@v2.2.0
       with:
         servers: |
-            [{
-                "id": "specshell",
-                "username": "${env.NEXUS_USER}",
-                "password": "${env.NEXUS_PASSWORD}"
-            }]
+          [{
+            "id": "specshell",
+            "username": "${env.NEXUS_USER}",
+            "password": "${env.NEXUS_PASSWORD}"
+          }]
 
     - name: Cache local Maven repository
       uses: actions/cache@v2

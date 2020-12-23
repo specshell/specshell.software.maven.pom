@@ -13,11 +13,16 @@ jobs:
     - uses: s4u/maven-settings-action@v2.2.0
       with:
         servers: |
-            [{
-                "id": "specshell",
-                "username": "${env.NEXUS_USER}",
-                "password": "${env.NEXUS_PASSWORD}"
-            }]
+          [{
+            "id": "specshell",
+            "username": "${env.NEXUS_USER}",
+            "password": "${env.NEXUS_PASSWORD}"
+          },
+          {
+            "id": "ossrh",
+            "username": "${env.OSSRH_USER}",
+            "password": "${env.OSSRH_TOKEN}"
+          }]
 
     - name: Cache local Maven repository
       uses: actions/cache@v2
@@ -37,17 +42,49 @@ jobs:
       run: |
         mvn versions:set -DnewVersion=$RELEASE_VERSION
 
+    - name: Import GPG key
+      id: import_gpg
+      uses: crazy-max/ghaction-import-gpg@v3
+      with:
+        gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+    - name: GPG user IDs
+      run: |
+        echo "fingerprint: ${{ steps.import_gpg.outputs.fingerprint }}"
+        echo "keyid:       ${{ steps.import_gpg.outputs.keyid }}"
+        echo "name:        ${{ steps.import_gpg.outputs.name }}"
+        echo "email:       ${{ steps.import_gpg.outputs.email }}"
+
     - name: Deploy Nexus release
       env:
         NEXUS_USER: ${{ secrets.NEXUS_USER }}
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run: |
-        mvn -B -V --no-transfer-progress deploy
+        mvn -B -V --no-transfer-progress deploy \
+          -P sign \
+          --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
+          --define gpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
 
     - name: Deploy GitHub release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         mvn -B -V --no-transfer-progress deploy \
-          -P github \
-          --define github.repo=specshell.software.maven.pom
+          -P github,sign \
+          --define github.repo=specshell.software.maven.pom \
+          --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
+          --define gpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+
+    - name: Deploy Maven Central release
+      env:
+        OSSRH_USER: ${{ secrets.OSSRH_USER }}
+        OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
+      run: |
+        mvn -B -V --no-transfer-progress deploy \
+          -P ossrh,sign \
+          --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
+          --define gpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+
+    - name: GPG Verify
+      run: gpg --verify target/pom-*.pom.asc target/pom-*.pom
