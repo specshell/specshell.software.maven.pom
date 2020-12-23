@@ -12,6 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - uses: s4u/maven-settings-action@v2.2.0
+        with:
+          servers: |
+            [{
+              "id": "specshell",
+              "username": "${env.NEXUS_USER}",
+              "password": "${env.NEXUS_PASSWORD}"
+            }]
+
       - name: Import GPG key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v3
@@ -27,6 +36,9 @@ jobs:
           echo "email:       ${{ steps.import_gpg.outputs.email }}"
 
       - name: Maven Verify
+        env:
+          NEXUS_USER: ${{ secrets.NEXUS_USER }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
         run: |
           mvn -B -V --no-transfer-progress verify -P sign \
           --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
