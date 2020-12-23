@@ -43,3 +43,6 @@ jobs:
           mvn -B -V --no-transfer-progress verify -P sign \
           --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
           --define gpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+
+      - name: GPG Verify
+        run: gpg --verify target/pom-*.pom.asc target/pom-*.pom
