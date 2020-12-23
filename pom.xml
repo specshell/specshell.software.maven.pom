@@ -8,6 +8,7 @@
 
   <name>Specshell Parent POM</name>
   <description>Specshell Parent POM Project</description>
+  <url>https://github.com/Specshell</url>
   <inceptionYear>2020</inceptionYear>
 
   <properties>
@@ -20,6 +21,7 @@
     <spring.boot.version>2.4.1</spring.boot.version>
     <github.repo>undefined</github.repo>
   </properties>
+
   <scm>
     <connection>scm:git:git://github.com/Specshell/specshell.software.maven.pom.git</connection>
     <developerConnection>scm:git:https://github.com/Specshell/specshell.software.maven.pom.git</developerConnection>
@@ -190,6 +192,21 @@
       </resource>
     </resources>
   </build>
+
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>specshell</id>
+      <name>Specshell</name>
+    </developer>
+  </developers>
 
   <repositories>
     <repository>
