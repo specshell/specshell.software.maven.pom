@@ -8,6 +8,7 @@
 
   <name>Specshell Parent POM</name>
   <description>Specshell Parent POM Project</description>
+  <url>https://github.com/Specshell</url>
   <inceptionYear>2020</inceptionYear>
 
   <properties>
@@ -20,6 +21,7 @@
     <spring.boot.version>2.4.1</spring.boot.version>
     <github.repo>undefined</github.repo>
   </properties>
+
   <scm>
     <connection>scm:git:git://github.com/Specshell/specshell.software.maven.pom.git</connection>
     <developerConnection>scm:git:https://github.com/Specshell/specshell.software.maven.pom.git</developerConnection>
@@ -78,6 +80,26 @@
         <plugin>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.6</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+              <configuration>
+                <gpgArguments>
+                  <arg>--pinentry-mode</arg>
+                  <arg>loopback</arg>
+                </gpgArguments>
+                <passphraseServerId>${gpg.keyname}</passphraseServerId>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
@@ -191,6 +213,21 @@
     </resources>
   </build>
 
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>specshell</id>
+      <name>Specshell</name>
+    </developer>
+  </developers>
+
   <repositories>
     <repository>
       <id>specshell</id>
@@ -233,6 +270,27 @@
           <url>https://maven.pkg.github.com/specshell/${github.repo}</url>
         </repository>
       </distributionManagement>
+    </profile>
+    <profile>
+      <id>ossrh</id>
+      <distributionManagement>
+        <repository>
+          <id>ossrh</id>
+          <name>Central Repository OSSRH</name>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>sign</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
