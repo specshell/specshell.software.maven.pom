@@ -62,7 +62,7 @@ jobs:
         NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run: |
         mvn -B -V --no-transfer-progress deploy \
-          -P sign \
+          -P sign,deploy \
           --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
           --define gpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
 
@@ -71,7 +71,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         mvn -B -V --no-transfer-progress deploy \
-          -P github,sign \
+          -P github,sign,deploy \
           --define github.repo=specshell.software.maven.pom \
           --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
           --define gpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
@@ -82,7 +82,7 @@ jobs:
         OSSRH_TOKEN: ${{ secrets.OSSRH_TOKEN }}
       run: |
         mvn -B -V --no-transfer-progress deploy \
-          -P ossrh,sign \
+          -P ossrh,sign,deploy \
           --define gpg.keyname=${{ steps.import_gpg.outputs.fingerprint }} \
           --define gpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
 
