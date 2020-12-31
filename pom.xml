@@ -97,6 +97,17 @@
           </executions>
         </plugin>
         <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.1.1</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>8.36.2</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.2.0</version>
         </plugin>
@@ -156,6 +167,49 @@
           <releaseProfiles>${releaseProfiles}</releaseProfiles>
           <scmCommentPrefix xml:space="preserve">[ci skip] </scmCommentPrefix>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <sourceDirectories>
+            <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+          </sourceDirectories>
+          <testSourceDirectories>
+            <sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
+          </testSourceDirectories>
+          <checkstyleRules>
+            <module name="Checker">
+              <module name="FileTabCharacter" />
+              <module name="NewlineAtEndOfFile">
+                <property name="lineSeparator" value="lf" />
+              </module>
+              <module name="RegexpSingleline">
+                <property name="format" value="\s+$"/>
+                <property name="message" value="Trailing spaces are not allowed."/>
+              </module>
+              <module name="TreeWalker">
+                <module name="ImportOrder">
+                  <property name="separatedStaticGroups" value="true" />
+                  <property name="option" value="bottom" />
+                </module>
+                <module name="UnusedImports" />
+                <module name="AvoidStarImport" />
+                <module name="SuppressionXpathSingleFilter">
+                  <property name="files" value=".+\.properties"/>
+                  <property name="checks" value=".+"/>
+                </module>
+              </module>
+            </module>
+          </checkstyleRules>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <!--  the following 2 plugins are for integration tests of parent-pom only -->
