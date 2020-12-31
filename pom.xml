@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.specshell.maven</groupId>
   <artifactId>pom</artifactId>
-  <version>0.1.18-SNAPSHOT</version>
+  <version>0.1.36-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Specshell Parent POM</name>
@@ -195,10 +195,10 @@
                 </module>
                 <module name="UnusedImports" />
                 <module name="AvoidStarImport" />
-                <module name="SuppressionXpathSingleFilter">
-                  <property name="files" value=".+\.properties"/>
-                  <property name="checks" value=".+"/>
-                </module>
+              </module>
+              <module name="SuppressionSingleFilter">
+                <property name="checks" value=".+"/>
+                <property name="files" value=".+\.properties"/>
               </module>
             </module>
           </checkstyleRules>
