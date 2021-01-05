@@ -138,6 +138,11 @@
           <version>3.2.0</version>
         </plugin>
         <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>2.7.0</version>
+        </plugin>
+        <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>2.4.1</version>
@@ -213,6 +218,18 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <configuration>
+          <java>
+            <importOrder>
+              <order>,\#</order>
+            </importOrder>
+            <removeUnusedImports />
+          </java>
+        </configuration>
       </plugin>
 
       <!--  the following 2 plugins are for integration tests of parent-pom only -->
