@@ -19,6 +19,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <specshell.bom.version>0.1.29</specshell.bom.version>
     <spring.boot.version>2.4.1</spring.boot.version>
+    <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
     <github.repo>undefined</github.repo>
   </properties>
 
@@ -98,7 +99,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>${maven.checkstyle.plugin.version}</version>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
@@ -268,6 +269,19 @@
       </resource>
     </resources>
   </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.plugin.version}</version>
+      </plugin>
+    </plugins>
+  </reporting>
 
   <licenses>
     <license>
