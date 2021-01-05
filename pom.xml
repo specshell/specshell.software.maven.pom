@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.specshell.maven</groupId>
   <artifactId>pom</artifactId>
-  <version>0.1.18-SNAPSHOT</version>
+  <version>0.1.36-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Specshell Parent POM</name>
@@ -19,6 +19,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <specshell.bom.version>0.1.29</specshell.bom.version>
     <spring.boot.version>2.4.1</spring.boot.version>
+    <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
     <github.repo>undefined</github.repo>
   </properties>
 
@@ -97,6 +98,17 @@
           </executions>
         </plugin>
         <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven.checkstyle.plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>8.38</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.2.0</version>
         </plugin>
@@ -124,6 +136,11 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>2.7.0</version>
         </plugin>
         <plugin>
           <groupId>org.springframework.boot</groupId>
@@ -155,6 +172,63 @@
           <arguments>${arguments}</arguments>
           <releaseProfiles>${releaseProfiles}</releaseProfiles>
           <scmCommentPrefix xml:space="preserve">[ci skip] </scmCommentPrefix>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <failOnViolation>false</failOnViolation>
+          <failsOnError>false</failsOnError>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <sourceDirectories>
+            <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+          </sourceDirectories>
+          <testSourceDirectories>
+            <sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
+          </testSourceDirectories>
+          <checkstyleRules>
+            <module name="Checker">
+              <module name="FileTabCharacter" />
+              <module name="NewlineAtEndOfFile">
+                <property name="lineSeparator" value="lf" />
+              </module>
+              <module name="RegexpSingleline">
+                <property name="format" value="\s+$"/>
+                <property name="message" value="Trailing spaces are not allowed."/>
+              </module>
+              <module name="TreeWalker">
+                <module name="ImportOrder">
+                  <property name="separatedStaticGroups" value="true" />
+                  <property name="option" value="bottom" />
+                </module>
+                <module name="UnusedImports" />
+                <module name="AvoidStarImport" />
+              </module>
+              <module name="SuppressionSingleFilter">
+                <property name="checks" value=".+"/>
+                <property name="files" value=".+\.properties"/>
+              </module>
+            </module>
+          </checkstyleRules>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <configuration>
+          <java>
+            <importOrder>
+              <order>,\#</order>
+            </importOrder>
+            <removeUnusedImports />
+          </java>
         </configuration>
       </plugin>
 
@@ -212,6 +286,19 @@
       </resource>
     </resources>
   </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.plugin.version}</version>
+      </plugin>
+    </plugins>
+  </reporting>
 
   <licenses>
     <license>
