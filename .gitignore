@@ -42,7 +42,6 @@ www-test/
 #############################################
 # Android / IntelliJ general                #
 #############################################
-## Android Studio and Intellij and Android in general
 android/libs/armeabi/
 android/libs/armeabi-v7a/
 android/libs/x86/
