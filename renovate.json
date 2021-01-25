@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "github>Specshell/specshell.renovate.config"
-  ]
+  "extends": ["github>Specshell/specshell.renovate.config"]
 }
