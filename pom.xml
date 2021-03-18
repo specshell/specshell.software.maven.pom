@@ -176,7 +176,7 @@
           <goals>deploy</goals>
           <arguments>${arguments}</arguments>
           <releaseProfiles>${releaseProfiles}</releaseProfiles>
-          <scmCommentPrefix xml:space="preserve">[ci skip] </scmCommentPrefix>
+          <scmCommentPrefix xml:space="preserve">[ci skip]</scmCommentPrefix>
         </configuration>
       </plugin>
       <plugin>
@@ -198,8 +198,8 @@
                 <property name="lineSeparator" value="lf" />
               </module>
               <module name="RegexpSingleline">
-                <property name="format" value="\s+$"/>
-                <property name="message" value="Trailing spaces are not allowed."/>
+                <property name="format" value="\s+$" />
+                <property name="message" value="Trailing spaces are not allowed." />
               </module>
               <module name="TreeWalker">
                 <module name="ImportOrder">
@@ -210,8 +210,8 @@
                 <module name="AvoidStarImport" />
               </module>
               <module name="SuppressionSingleFilter">
-                <property name="checks" value=".+"/>
-                <property name="files" value=".+\.properties"/>
+                <property name="checks" value=".+" />
+                <property name="files" value=".+\.properties" />
               </module>
             </module>
           </checkstyleRules>
@@ -324,7 +324,7 @@
     <repository>
       <id>specshell</id>
       <name>specshell-maven</name>
-      <url>https://nexus.specshell.systems/repository/maven-public</url>
+      <url>https://nexus.specshell.systems/repository/maven-public/</url>
     </repository>
     <repository>
       <id>github</id>
@@ -336,7 +336,7 @@
     <pluginRepository>
       <id>specshell</id>
       <name>specshell-maven</name>
-      <url>https://nexus.specshell.systems/repository/maven-public</url>
+      <url>https://nexus.specshell.systems/repository/maven-public/</url>
     </pluginRepository>
   </pluginRepositories>
   <distributionManagement>

@@ -4,7 +4,7 @@ version: 2
 registries:
   maven-nexus:
     type: maven-repository
-    url: https://nexus.specshell.systems
+    url: https://nexus.specshell.systems/repository/maven-public/
     username: ${{secrets.NEXUS_USERNAME}}
     password: ${{secrets.NEXUS_PASSWORD}}
 updates:
