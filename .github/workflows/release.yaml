@@ -39,6 +39,9 @@ jobs:
         echo "GIT_SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
     - name: Set version
+      env:
+        NEXUS_USER: ${{ secrets.NEXUS_USER }}
+        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
       run: |
         mvn versions:set -DnewVersion=$RELEASE_VERSION
 
