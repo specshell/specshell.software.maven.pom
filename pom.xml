@@ -17,7 +17,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <specshell.bom.version>0.1.32</specshell.bom.version>
+    <specshell.bom.version>0.1.33</specshell.bom.version>
     <spring.boot.version>2.4.2</spring.boot.version>
     <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
     <github.repo>undefined</github.repo>
